@@ -1,5 +1,5 @@
 function solve(input){
-input=input.replace(/ans/g,answer)
+input=input.replace(/ans/g,prevAnswer)
 out: while(!input.match(/^\-?\d+(?:\.\d+)?$/)){
   while(input.match(/(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)/)){
      //fix bug caused by input such as 4-3*-2, turning it to 4+-3*-2
@@ -36,6 +36,7 @@ out: while(!input.match(/^\-?\d+(?:\.\d+)?$/)){
     console.log(input);continue out
 
   }
+  return 'ERROR'
 }
 
   return input;
@@ -68,7 +69,7 @@ const plus=document.querySelector('.plus')
 const ans=document.querySelector('.ans')//fsfdf
 const point=document.querySelector('.point')
 const equals=document.querySelector('.equals')
-let answer=0//saved answer
+let prevAnswer=0//saved answer
 
 
 one.addEventListener('click',()=>input.innerHTML+='1')
@@ -108,6 +109,7 @@ delet.addEventListener('click',function(){
 })
 equals.addEventListener('click',function(){
   answer=solve(input.innerHTML);
+  prevAnswer=answer=='ERROR'?prevAnswer:answer;
   result.innerHTML=answer;
   prevOperation.innerHTML=input.innerHTML;
   input.innerHTML='';
