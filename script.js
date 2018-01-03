@@ -1,39 +1,39 @@
 function solve(input){
 input=input.replace(/ans/g,prevAnswer)
 out: while(!input.match(/^\-?\d+(?:\.\d+)?$/)){
-  while(input.match(/(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)/)){
+  if(input.match(/(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)/)){
      //fix bug caused by input such as 4-3*-2, turning it to 4+-3*-2
     input=input.replace(/(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)/,function($1,$2,$3){return $2+'+-'+$3})
-    console.log(input) ;continue out
+    continue out
   }
 
-  while(input.match(/(\-?\d+(?:\.\d+)?)%/)){//percentage
+  if(input.match(/(\-?\d+(?:\.\d+)?)%/)){//percentage
     input=input.replace(/(\-?\d+(?:\.\d+)?)%/,function($1,$2){return $2/100})
-    console.log(input) ;continue out
+    continue out
   }
 
-  while(input.match(/\((\-?\d+(?:\.\d+)?)\)\^(\-?\d+(?:\.\d+)?)/)){//power of negatives e.g. (-5)^2
+  if(input.match(/\((\-?\d+(?:\.\d+)?)\)\^(\-?\d+(?:\.\d+)?)/)){//power of negatives e.g. (-5)^2
     input=input.replace(/\((\-?\d+(?:\.\d+)?)\)\^(\-?\d+(?:\.\d+)?)/,function($1,$2,$3){return $2**$3})
-    console.log(input);continue out
+    continue out
   }
 
-  while(input.match(/\((\-?\d+(?:\.\d+)?)\)/)){//parenthesis
+  if(input.match(/\((\-?\d+(?:\.\d+)?)\)/)){//parenthesis
     input=input.replace(/\((\-?\d+(?:\.\d+)?)\)/,function($1,$2){return $2})
-    console.log(input);continue out
+    continue out
   }
-  while(input.match(/(\d+(?:\.\d+)?)\^(\-?\d+(?:\.\d+)?)/)){//power
+  if(input.match(/(\d+(?:\.\d+)?)\^(\-?\d+(?:\.\d+)?)/)){//power
     input=input.replace(/(\d+(?:\.\d+)?)\^(\-?\d+(?:\.\d+)?)/,function($1,$2,$3){return $2**$3});
-    console.log(input);continue out
+    continue out
 
   }
-  while(input.match(/(\-?\d+(?:\.\d+)?)(\*|\/)(\-?\d+(?:\.\d+)?)/)){//multiply and divide
+  if(input.match(/(\-?\d+(?:\.\d+)?)(\*|\/)(\-?\d+(?:\.\d+)?)/)){//multiply and divide
     input=input.replace(/(\-?\d+(?:\.\d+)?)(\*|\/)(\-?\d+(?:\.\d+)?)/,function($1,$2,$3,$4){return ($3=='*')?$2*$4:$2/$4})
-    console.log(input);continue out
+    continue out
 
   }
-  while(input.match(/(\-?\d+(?:\.\d+)?)(\+|\-)(\-?\d+(?:\.\d+)?)/)){//plus and minus
+  if(input.match(/(\-?\d+(?:\.\d+)?)(\+|\-)(\-?\d+(?:\.\d+)?)/)){//plus and minus
     input=input.replace(/(\-?\d+(?:\.\d+)?)(\+|\-)(\-?\d+(?:\.\d+)?)/,function($1,$2,$3,$4){return ($3=='+')?$2/1+$4/1:$2-$4})
-    console.log(input);continue out
+    continue out
 
   }
   return 'ERROR'
@@ -82,21 +82,35 @@ seven.addEventListener('click',()=>input.innerHTML+='7')
 eight.addEventListener('click',()=>input.innerHTML+='8')
 nine.addEventListener('click',()=>input.innerHTML+='9')
 zero.addEventListener('click',()=>input.innerHTML+='0')
+
 openBracket.addEventListener('click',()=>input.innerHTML+='(')
 closeBracket.addEventListener('click',()=>input.innerHTML+=')')
-divide.addEventListener('click',()=>input.innerHTML+='/')
+
+divide.addEventListener('click',function(){
+  input.innerHTML==''?input.innerHTML+='ans/':input.innerHTML+='/'
+})
 percent.addEventListener('click',()=>input.innerHTML+='%')
-multiply.addEventListener('click',()=>input.innerHTML+='*')
-power.addEventListener('click',()=>input.innerHTML+='^')
-minus.addEventListener('click',()=>input.innerHTML+='-')
-plus.addEventListener('click',()=>input.innerHTML+='+')
-point.addEventListener('click',()=>input.innerHTML+='1')
+multiply.addEventListener('click',function(){
+  input.innerHTML==''?input.innerHTML+='ans*':input.innerHTML+='*'
+})
+power.addEventListener('click',function(){
+  input.innerHTML==''?input.innerHTML+='ans^':input.innerHTML+='^'
+})
+minus.addEventListener('click',function(){
+  input.innerHTML==''?input.innerHTML+='ans-':input.innerHTML+='-'
+})
+plus.addEventListener('click',function(){
+  input.innerHTML==''?input.innerHTML+='ans+':input.innerHTML+='+'
+})
+
+point.addEventListener('click',()=>input.innerHTML+='.')
 ans.addEventListener('click',()=>input.innerHTML+='ans')
 
 
 clear.addEventListener('click',function(){
   input.innerHTML=''
   result.innerHTML=''
+  prevOperation.innerHTML=''
 })
 delet.addEventListener('click',function(){
   let x=input.innerHTML.split('')
@@ -110,11 +124,11 @@ delet.addEventListener('click',function(){
 equals.addEventListener('click',function(){
   answer=solve(input.innerHTML);
   prevAnswer=answer=='ERROR'?prevAnswer:answer;
+  //saved answer, not converted into scientific to avoid error
+    if (answer>1e+10||answer<-1e+10){
+      answer=Number(answer).toExponential(7);
+    }
   result.innerHTML=answer;
   prevOperation.innerHTML=input.innerHTML;
   input.innerHTML='';
 })
-/*while(input.match(/ /)){
-  input=input.replace(/ /,function(){})
-}*/
-//(\-?\d+(?:\.\d+)?)

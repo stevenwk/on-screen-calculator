@@ -3,39 +3,42 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+
     <title>Calculator</title>
   </head>
   <body>
     <div class="frame">
       <div class="disp">
-        <div class="prevOperation"></div>
-        <div class="result"></div>
-        <div class="input"></div>
+        <div class="prevOperation" id='prevOperation'></div>
+        <div class="result" id="result"></div>
+        <div class="input" id='input'></div>
       </div>
-      <div class="on">ON/OFF</div>
-      <div class="clear">CE</div>
-      <div class="delet">DEL</div>
-      <div class="openBracket">(</div>
-      <div class="closeBracket">)</div>
-      <div class="seven">7</div>
-      <div class="eight">8</div>
-      <div class="nine">9</div>
-      <div class="divide">/</div>
-      <div class="percent">%</div>
-      <div class="four">4</div>
-      <div class="five">5</div>
-      <div class="six">6</div>
-      <div class="multiply">x</div>
-      <div class="power">^</div>
-      <div class="one">1</div>
-      <div class="two">2</div>
-      <div class="three">3</div>
-      <div class="minus">-</div>
-      <div class="plus">+</div>
-      <div class="zero">0</div>
-      <div class="ans">ans</div>
-      <div class="point">.</div>
-      <div class="equals">=</div>
+      <div class="on red">ON</div>
+      <div class="clear red">CE</div>
+      <div class="delet red">DEL</div>
+      <div class="openBracket dark">(</div>
+      <div class="closeBracket dark">)</div>
+      <div class="seven grey">7</div>
+      <div class="eight grey">8</div>
+      <div class="nine grey">9</div>
+      <div class="divide dark">/</div>
+      <div class="percent dark">%</div>
+      <div class="four grey">4</div>
+      <div class="five grey">5</div>
+      <div class="six grey">6</div>
+      <div class="multiply dark">x</div>
+      <div class="power dark">^</div>
+      <div class="one grey">1</div>
+      <div class="two grey">2</div>
+      <div class="three grey">3</div>
+      <div class="minus dark">-</div>
+      <div class="plus dark">+</div>
+      <div class="zero grey">0</div>
+      <div class="ans grey">ans</div>
+      <div class="point grey">.</div>
+      <div class="equals dark">=</div>
 
       <script src='script.js'></script>
       </div>
