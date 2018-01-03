@@ -38,13 +38,14 @@
   justify-content: center;
   overflow: hidden;
   padding:0;
+  background-color: #009688;
 }
 .disp div{
   background-color: #009688;
   color: #333;
   border-radius: 0;
   font-family: VT323;
-  padding: 7% 10px;
+  padding: 0 10px;
   margin: auto 0;
   text-align: right;
 }
@@ -52,8 +53,8 @@
   grid-area:plus;
 }
 #prevOperation{
-  font-size: 17px;
-  height: 17px;
+  font-size: 18px;
+  height: 18px;
 }
 #result{
   font-size: 45px;
